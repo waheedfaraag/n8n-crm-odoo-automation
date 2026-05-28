@@ -1,6 +1,6 @@
 # CRM Lead Automation Workflow (n8n)
 
-![n8n Workflow](CRM%20ODOO.png)
+![n8n Workflow]([CRM%20ODOO.png](https://github.com/waheedfaraag/n8n-crm-odoo-automation/blob/main/crm_odoo.png?raw=true))
 
 
 مستودع يحتوي على نظام أتمتة متكامل لإدارة علاقات العملاء (CRM) تم بناؤه باستخدام **n8n**. يقوم النظام بفلترة البيانات المستلمة من الاستمارات تلقائياً لمنع داتا التجارب (Spam)، ومن ثم توجيه البيانات السليمة إلى عدة منصات في خط مستقيم عالي الكفاءة.
