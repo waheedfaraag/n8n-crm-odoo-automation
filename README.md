@@ -1,2 +1,17 @@
-# n8n-crm-odoo-automation
- Automated CRM workflow connecting Forms, Telegram, Google Sheets, Odoo, and Gmail using n8n
+# CRM Lead Automation Workflow (n8n)
+
+مستودع يحتوي على نظام أتمتة متكامل لإدارة علاقات العملاء (CRM) تم بناؤه باستخدام **n8n**. يقوم النظام بفلترة البيانات المستلمة من الاستمارات تلقائياً لمنع داتا التجارب (Spam)، ومن ثم توجيه البيانات السليمة إلى عدة منصات في خط مستقيم عالي الكفاءة.
+
+## 🚀 خط سير البيانات (Workflow Steps)
+1. **Trigger:** استقبال الفورم (On form submission).
+2. **Filter (If Node):** فحص الطلب ومنع الكلمات الدلالية مثل (test / تجربة) من المرور.
+3. **Telegram:** إرسال إشعار فوري وتفصيلي للهاتف بالعملاء الحقيقيين فقط.
+4. **Google Sheets:** تسجيل داتا العميل وتحديثها في شيت البيانات.
+5. **Odoo CRM:** إنشاء فرصة بيعية جديدة (Opportunity) تلقائياً داخل السيستم.
+6. **Gmail:** إرسال بريد إلكتروني تأكيدي وترحيبي للعميل.
+
+## 🛠️ التكنولوجيات المستخدمة
+* n8n (Workflow Automation)
+* Odoo CRM API
+* Telegram Bot API
+* Google Sheets & Gmail Integrations
