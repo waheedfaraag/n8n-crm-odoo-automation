@@ -1,0 +1,325 @@
+{
+  "name": "odoo CRM copy",
+  "nodes": [
+    {
+      "parameters": {
+        "resource": "opportunity",
+        "opportunityName": "=lead from  {{ $json[\"?What is your name \"] }}",
+        "additionalFields": {
+          "email_from": "={{ $json[\"What is your email \"] }}",
+          "description": "={{ $json[\"notes \"] }}",
+          "phone": "={{ $json[\"What is your phone  \"] }}"
+        }
+      },
+      "type": "n8n-nodes-base.odoo",
+      "typeVersion": 1,
+      "position": [
+        272,
+        -144
+      ],
+      "id": "YOUR_0D00_ID_HERE",
+      "name": "Create an opportunity",
+      "credentials": {
+        "odooApi": {
+          "id": "YOUR_0D00_ID_HERE",
+          "name": "Odoo account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('On form submission').item.json[\"what is your email?\"] }}",
+        "subject": "welcome to our compony ",
+        "emailType": "text",
+        "message": "=Hello  {{ $('On form submission').item.json[\"what is your email?\"] }}\nthank you for regestration wwith our company.\nCastomer servive will conatact wwith you in the soon.\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        480,
+        -144
+      ],
+      "id": "d9074683-468f-4f4a-bcfc-c3114c5f15f7",
+      "name": "Send a message",
+      "webhookId": "YOUR_WEBHHK_ID",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_ID",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "formTitle": "CRM Odoo ",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "what is your name?",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "what is your email?",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "what is your phone number?",
+              "fieldType": "number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "what is your order?",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -800,
+        -160
+      ],
+      "id": "YOUR_ODOO_ID",
+      "name": "On form submission",
+      "webhookId": "YOUR_ODOO_WEBHOOKID"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "12uAUR5TGQr4umNMDKw_UgwSw1yInsLpTlpBz1eYb8LA",
+          "mode": "list",
+          "cachedResultName": "customer odoo n8n",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12uAUR5TGQr4umNMDKw_UgwSw1yInsLpTlpBz1eYb8LA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1780202870,
+          "mode": "list",
+          "cachedResultName": "ردود النموذج 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12uAUR5TGQr4umNMDKw_UgwSw1yInsLpTlpBz1eYb8LA/edit#gid=1780202870"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "طابع زمني": "={{ $json.formMode }}",
+            "?What is your name ": "={{ $json[\"what is your name?\"] }}",
+            "What is your email ": "={{ $json[\"what is your email?\"] }}",
+            "What is your phone  ": "={{ $json[\"what is your phone number?\"] }}",
+            "notes ": "={{ $json[\"what is your order?\"] }}"
+          },
+          "matchingColumns": [
+            "طابع زمني"
+          ],
+          "schema": [
+            {
+              "id": "طابع زمني",
+              "displayName": "طابع زمني",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "?What is your name ",
+              "displayName": "?What is your name ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "What is your email ",
+              "displayName": "What is your email ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "What is your phone  ",
+              "displayName": "What is your phone  ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "notes ",
+              "displayName": "notes ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        48,
+        -144
+      ],
+      "id": "afd12042-9c6b-4791-b692-4350d62ea64e",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "9nDDCje6vtrRgb4E",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_CHAT_ID",
+        "text": "=🚨 عميل جديد مهتم!\n👤 الاسم: {{ $json['what is your name?'] }}\n📞 الهاتف: {{ $json['what is your phone number?'] }}\n📧 الإيميل: {{ $json['what is your email?'] }}\n💼 الطلب: {{ $json['what is your order?'] }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -224,
+        -144
+      ],
+      "id": "YOUR_TOKEN_HERE",
+      "name": "Send a text message",
+      "webhookId": "YOUR_PASSWORD_HERE",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_ID",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "00de9536-04be-4b99-817a-2237ba002fa0",
+              "leftValue": "={{ $json[\"what is your order?\"] }}",
+              "rightValue": "test",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "b6000e0d-405e-4480-b30e-24fb9dda273f",
+              "leftValue": "={{ $json[\"what is your order?\"] }}",
+              "rightValue": "تجربة",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "looseTypeValidation": "={{ false }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -528,
+        -160
+      ],
+      "id": "208b7d54-8e4a-46d2-89b2-eed7335caa35",
+      "name": "If"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Create an opportunity": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Create an opportunity",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "c666648b-0296-42e3-939c-98430e0fc7cb",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "921999507e40ea1e3f82d2e09db5789760aa697a7ece459104feb458b362969f"
+  },
+  "id": "jO2CToyQegHS07JA",
+  "tags": []
+}
